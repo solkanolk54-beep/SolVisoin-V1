@@ -1,0 +1,6 @@
+{
+  "name": "SolVision Spatial Intelligence Platform",
+  "description": "Next-generation modular geospatial & agricultural intelligence platform with SoilGrids VRT clipping, IDW field calibration, RUSLE K-factor erosion modeling, and PostGIS pipeline.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
