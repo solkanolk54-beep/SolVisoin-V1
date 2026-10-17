@@ -76,13 +76,13 @@ export const Step1Clipping: React.FC<Step1ClippingProps> = ({ farm, lang, onNext
               </div>
               <h2 className="text-lg font-bold text-slate-100 mt-1">
                 {isAr
-                  ? 'المرحلة الأولى - ١. القص والتحويل الجغرافي (Clipping & Reprojection)'
-                  : 'Stage 01 - 1. Spatial Clipping & Coordinate Reprojection'}
+                  ? '١. القص والتحويل الجغرافي (Clipping & Reprojection)'
+                  : '1. Clipping & Coordinate Reprojection (Rasterio + GDAL)'}
               </h2>
               <p className="text-xs text-slate-300 mt-1.5 max-w-3xl leading-relaxed">
                 {isAr
-                  ? 'استخدام مكتبة Rasterio لقص نافذة الحقل فقط من ملفات VRT العالمية (SoilGrids) دون تحميل ملف الراستر كاملاً لتوفير الذاكرة، مع إعادة الإسقاط إلى نظام UTM Zone 31N (EPSG:32631) المخصصة للجزائر وشمال أفريقيا.'
-                  : 'Windowed bounding-box clipping from global SoilGrids Virtual Raster (.vrt) datasets using Rasterio, reducing RAM footprint from gigabytes to megabytes, reprojecting directly into UTM Zone 31N (EPSG:32631).'}
+                  ? 'قص مضلع المزرعة واستخلاص وحجب الطبقات الماتريسية لـ SoilGrids (SOC, Clay, Sand, Silt) باستخدام تقنية VRT و Rasterio دون تحميل الراستر كاملاً، وإعادة الإسقاط إلى UTM Zone 31N (EPSG:32631).'
+                  : 'Cutting farm polygon boundary, masking SoilGrids raster layers (SOC, Clay, Sand, Silt) via Rasterio + VRT windowing, and reprojection to UTM 31N (EPSG:32631).'}
               </p>
             </div>
           </div>

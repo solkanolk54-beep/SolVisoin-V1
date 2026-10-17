@@ -254,3 +254,70 @@ export interface AgronomicRecommendation {
   urgency: 'high' | 'medium' | 'low';
   icon: string;
 }
+
+export type BurnSeverityLevel = 'unburned' | 'low' | 'moderate_low' | 'moderate_high' | 'high';
+
+export interface BurnSeverityZone {
+  level: BurnSeverityLevel;
+  nameEn: string;
+  nameAr: string;
+  dnbrRange: string;
+  areaHa: number;
+  areaPct: number;
+  hydrophobicity: 'None' | 'Low' | 'Moderate' | 'Severe' | 'Extreme';
+  hydrophobicityAr: string;
+  kMultiplier: number;
+  cFactor: number;
+  curveNumber: number;
+}
+
+export interface PostFireHotspot {
+  id: string;
+  nameEn: string;
+  nameAr: string;
+  catchment: string;
+  catchmentAr: string;
+  lat: number;
+  lng: number;
+  areaHa: number;
+  slopeDeg: number;
+  slopePct: number;
+  dnbrMean: number;
+  severityLevel: BurnSeverityLevel;
+  preFireErosionTonHa: number;
+  postFireErosionTonHa: number;
+  siltRiskTonYear: number;
+  debrisFlowProbabilityPct: number;
+  recommendedInterventionEn: string;
+  recommendedInterventionAr: string;
+  interventionType: 'contour_felling' | 'check_dam' | 'straw_mulching' | 'sediment_basin' | 'warning_system';
+  priority: 'Critical' | 'High' | 'Moderate';
+  priorityAr: string;
+  estimatedCostDzd: number;
+  firstStormSoilLossTonHa?: number;
+  targetAgenciesAr?: string[];
+  targetAgenciesEn?: string[];
+  interventionUrgencyAr?: string;
+}
+
+export interface PostFireWatershedProfile {
+  id: string;
+  nameEn: string;
+  nameAr: string;
+  damNameEn: string;
+  damNameAr: string;
+  damCapacityMillionM3: number;
+  totalWatershedAreaHa: number;
+  burnedAreaTotalHa: number;
+  burnedPct: number;
+  meanSlopePct: number;
+  annualRainfallMm: number;
+  rFactor: number;
+  preFireSoilLossTonYear: number;
+  postFireSoilLossTonYear: number;
+  lossIncreaseRatio: number;
+  annualSiltDeliveryM3: number;
+  reservoirDeadStorageLossPctPerYear: number;
+  zones: BurnSeverityZone[];
+  hotspots: PostFireHotspot[];
+}

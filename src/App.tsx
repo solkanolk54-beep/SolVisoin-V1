@@ -12,6 +12,7 @@ import { SentinelNdviViewer } from './components/EarthObservation/SentinelNdviVi
 import { SmartFertilizerAdvisor } from './components/Agronomy/SmartFertilizerAdvisor';
 import { IntegrationTestSuite } from './components/Testing/IntegrationTestSuite';
 import { ClimateRiskAnalysis } from './components/Climate/ClimateRiskAnalysis';
+import { PostFireRiskPipeline } from './components/PostFire/PostFireRiskPipeline';
 import { GeoJsonUploadModal } from './components/Modals/GeoJsonUploadModal';
 import { PrintReportModal } from './components/Modals/PrintReportModal';
 
@@ -209,6 +210,13 @@ export default function App() {
               onSelectPixel={setSelectedPixel}
             />
           </div>
+        )}
+
+        {activeTab === 'post-fire' && (
+          <PostFireRiskPipeline
+            currentFarm={currentFarm}
+            lang={lang}
+          />
         )}
 
         {activeTab === 'climate' && (

@@ -10,11 +10,12 @@ import {
   TreePine,
   Satellite,
   FlaskConical,
-  SunMedium
+  SunMedium,
+  Flame
 } from 'lucide-react';
 import { Language } from '../types';
 
-export type TabId = 'pipeline' | 'gis-map' | 'climate' | 'carbon' | 'ndvi' | 'fertilizer' | 'testing' | 'architecture' | 'postgis' | 'queue' | 'geo-engine';
+export type TabId = 'pipeline' | 'gis-map' | 'post-fire' | 'climate' | 'carbon' | 'ndvi' | 'fertilizer' | 'testing' | 'architecture' | 'postgis' | 'queue' | 'geo-engine';
 
 interface NavigationTabsProps {
   activeTab: TabId;
@@ -44,6 +45,13 @@ export const NavigationTabs: React.FC<NavigationTabsProps> = ({
       labelEn: 'Map & Drawing',
       labelAr: 'الخريطة والرسم',
       icon: <MapIcon className="w-4 h-4" />,
+    },
+    {
+      id: 'post-fire',
+      labelEn: 'Post-Fire Risk (Jijel)',
+      labelAr: 'مخاطر ما بعد الحرائق (جيجل)',
+      icon: <Flame className="w-4 h-4 text-orange-400" />,
+      badge: isAr ? 'dNBR & RUSLE' : 'dNBR & Silt',
     },
     {
       id: 'climate',
