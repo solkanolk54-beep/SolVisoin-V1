@@ -87,18 +87,18 @@ export const Step1Clipping: React.FC<Step1ClippingProps> = ({ farm, lang, onNext
             </div>
           </div>
 
-          <div className="flex items-center gap-2 self-start md:self-auto shrink-0">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full md:w-auto shrink-0 mt-3 md:mt-0">
             <button
               onClick={handleSimulateClipping}
               disabled={isProcessing}
-              className="flex items-center gap-2 px-3 py-2 bg-[#0B0F19] hover:bg-slate-800 text-slate-200 border border-[#1E293B] rounded-xl text-xs font-medium transition cursor-pointer"
+              className="flex items-center justify-center gap-2 px-3.5 py-2.5 bg-[#0B0F19] hover:bg-slate-800 text-slate-200 border border-[#1E293B] rounded-xl text-xs font-medium transition cursor-pointer w-full sm:w-auto active:scale-95"
             >
               <RefreshCw className={`w-3.5 h-3.5 ${isProcessing ? 'animate-spin text-emerald-400' : ''}`} />
               <span>{isAr ? 'إعادة تشغيل القص' : 'Re-run Clip'}</span>
             </button>
             <button
               onClick={onNext}
-              className="flex items-center gap-2 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 rounded-xl text-xs font-bold transition shadow-lg shadow-emerald-500/25 active:scale-95 cursor-pointer"
+              className="flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 rounded-xl text-xs font-bold transition shadow-lg shadow-emerald-500/25 active:scale-95 cursor-pointer w-full sm:w-auto"
             >
               <span>{isAr ? 'الانتقال للمعايرة الحقلية' : 'Next: Field Calibration'}</span>
               <ArrowRight className="w-4 h-4 rtl:rotate-180" />

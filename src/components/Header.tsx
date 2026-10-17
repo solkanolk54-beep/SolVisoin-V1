@@ -89,75 +89,79 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Region Selector, Language & Actions */}
-        <div className="flex items-center gap-2 self-end md:self-auto flex-wrap">
+        <div className="flex items-center gap-2 w-full md:w-auto justify-between md:justify-end flex-wrap">
           {/* Farm Region Select */}
-          <div className="relative group">
-            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[#0F172A] border border-[#1E293B] rounded-lg text-xs hover:border-emerald-500/60 transition cursor-pointer">
-              <MapPin className="w-3.5 h-3.5 text-emerald-400" />
-              <select
-                aria-label="Select Farm Region"
-                value={currentFarm.id}
-                onChange={(e) => {
-                  const found = allFarms.find(f => f.id === e.target.value);
-                  if (found) onSelectFarm(found);
-                }}
-                className="bg-transparent text-slate-200 text-xs focus:outline-none cursor-pointer pr-4 font-medium"
-              >
-                {allFarms.map((farm) => {
-                  // Format requested: e.g. "قطاع الحمضيات (ha 142.5)"
-                  const zoneLabel = isAr
-                    ? (farm.id === 'mitidja-citrus-pilot' ? 'قطاع الحمضيات' : farm.nameAr)
-                    : (farm.id === 'mitidja-citrus-pilot' ? 'Citrus Sector' : farm.nameEn);
-                  return (
-                    <option key={farm.id} value={farm.id} className="bg-[#0B0F19] text-slate-200">
-                      {farm.isMultiPolygon ? '⚡ [Multi] ' : ''}
-                      {zoneLabel} ({farm.areaHectares} ha)
-                    </option>
-                  );
-                })}
-              </select>
+          <div className="relative group flex-1 sm:flex-initial min-w-[200px]">
+            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[#0F172A] border border-[#1E293B] rounded-lg text-xs hover:border-emerald-500/60 transition cursor-pointer w-full justify-between">
+              <div className="flex items-center gap-1.5 overflow-hidden">
+                <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <select
+                  aria-label="Select Farm Region"
+                  value={currentFarm.id}
+                  onChange={(e) => {
+                    const found = allFarms.find(f => f.id === e.target.value);
+                    if (found) onSelectFarm(found);
+                  }}
+                  className="bg-transparent text-slate-200 text-xs focus:outline-none cursor-pointer font-medium truncate w-full"
+                >
+                  {allFarms.map((farm) => {
+                    // Format requested: e.g. "قطاع الحمضيات (ha 142.5)"
+                    const zoneLabel = isAr
+                      ? (farm.id === 'mitidja-citrus-pilot' ? 'قطاع الحمضيات' : farm.nameAr)
+                      : (farm.id === 'mitidja-citrus-pilot' ? 'Citrus Sector' : farm.nameEn);
+                    return (
+                      <option key={farm.id} value={farm.id} className="bg-[#0B0F19] text-slate-200">
+                        {farm.isMultiPolygon ? '⚡ [Multi] ' : ''}
+                        {zoneLabel} ({farm.areaHectares} ha)
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
             </div>
           </div>
 
-          {/* Upload GeoJSON button */}
-          <button
-            onClick={onOpenUpload}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-[#0F172A] hover:bg-slate-800 text-slate-200 border border-[#1E293B] rounded-lg text-xs font-medium transition active:scale-95"
-            title={isAr ? 'رفع مضلع مزرعة (GeoJSON)' : 'Upload GeoJSON Boundary'}
-          >
-            <span className="text-emerald-400 font-bold">＋</span>
-            <span>{isAr ? 'رفع مضلع' : 'Upload'}</span>
-          </button>
+          <div className="flex items-center gap-1.5 shrink-0">
+            {/* Upload GeoJSON button */}
+            <button
+              onClick={onOpenUpload}
+              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 bg-[#0F172A] hover:bg-slate-800 text-slate-200 border border-[#1E293B] rounded-lg text-xs font-medium transition active:scale-95 cursor-pointer"
+              title={isAr ? 'رفع مضلع مزرعة (GeoJSON)' : 'Upload GeoJSON Boundary'}
+            >
+              <span className="text-emerald-400 font-bold">＋</span>
+              <span className="hidden xs:inline">{isAr ? 'رفع' : 'Upload'}</span>
+            </button>
 
-          {/* Print Report button */}
-          <button
-            onClick={onOpenPrint}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-[#0F172A] hover:bg-slate-800 text-slate-200 border border-[#1E293B] rounded-lg text-xs font-medium transition active:scale-95"
-            title={isAr ? 'طباعة تقرير الحقل (PDF)' : 'Print Field Report (PDF)'}
-          >
-            <span className="text-cyan-400">🖨</span>
-            <span className="hidden sm:inline">{isAr ? 'تقرير PDF' : 'PDF Report'}</span>
-          </button>
+            {/* Print Report button */}
+            <button
+              onClick={onOpenPrint}
+              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 bg-[#0F172A] hover:bg-slate-800 text-slate-200 border border-[#1E293B] rounded-lg text-xs font-medium transition active:scale-95 cursor-pointer"
+              title={isAr ? 'طباعة تقرير الحقل (PDF)' : 'Print Field Report (PDF)'}
+            >
+              <span className="text-cyan-400">🖨</span>
+              <span className="hidden sm:inline">{isAr ? 'PDF' : 'PDF'}</span>
+            </button>
 
-          {/* Export GeoJSON button */}
-          <button
-            onClick={onExportGeoJson}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-[#0F172A] hover:bg-slate-800 text-slate-200 border border-[#1E293B] rounded-lg text-xs font-medium transition active:scale-95"
-            title={isAr ? 'تصدير مضلع الحقل والطبقات (GeoJSON)' : 'Export Farm & Layers (GeoJSON)'}
-          >
-            <Download className="w-3.5 h-3.5 text-cyan-400" />
-            <span className="hidden sm:inline">GeoJSON</span>
-          </button>
+            {/* Export GeoJSON button */}
+            <button
+              onClick={onExportGeoJson}
+              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 bg-[#0F172A] hover:bg-slate-800 text-slate-200 border border-[#1E293B] rounded-lg text-xs font-medium transition active:scale-95 cursor-pointer"
+              title={isAr ? 'تصدير مضلع الحقل والطبقات (GeoJSON)' : 'Export Farm & Layers (GeoJSON)'}
+            >
+              <Download className="w-3.5 h-3.5 text-cyan-400" />
+              <span className="hidden sm:inline">GeoJSON</span>
+            </button>
 
-          {/* Language Toggle (EN / AR) */}
-          <button
-            onClick={onToggleLang}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-[#0F172A] hover:bg-slate-800 text-slate-200 border border-[#1E293B] hover:border-amber-500/50 rounded-lg text-xs font-medium transition active:scale-95"
-            title={isAr ? 'Switch to English' : 'تبديل إلى العربية'}
-          >
-            <Languages className="w-3.5 h-3.5 text-amber-400" />
-            <span className="font-mono font-bold">{isAr ? 'EN' : 'العربية'}</span>
-          </button>
+            {/* Language Toggle (EN / AR) */}
+            <button
+              onClick={onToggleLang}
+              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 bg-[#0F172A] hover:bg-slate-800 text-slate-200 border border-[#1E293B] hover:border-amber-500/50 rounded-lg text-xs font-medium transition active:scale-95 cursor-pointer"
+              title={isAr ? 'Switch to English' : 'تبديل إلى العربية'}
+            >
+              <Languages className="w-3.5 h-3.5 text-amber-400" />
+              <span className="font-mono font-bold">{isAr ? 'EN' : 'العربية'}</span>
+            </button>
+          </div>
         </div>
       </div>
     </header>

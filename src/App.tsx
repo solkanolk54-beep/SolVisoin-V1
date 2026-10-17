@@ -13,12 +13,15 @@ import { SmartFertilizerAdvisor } from './components/Agronomy/SmartFertilizerAdv
 import { IntegrationTestSuite } from './components/Testing/IntegrationTestSuite';
 import { ClimateRiskAnalysis } from './components/Climate/ClimateRiskAnalysis';
 import { PostFireRiskPipeline } from './components/PostFire/PostFireRiskPipeline';
+import { SolAiCopilot } from './components/Copilot/SolAiCopilot';
+import { DeepLearningFloodForecasting } from './components/Forecasting/DeepLearningFloodForecasting';
+import { FloatingCopilotWidget } from './components/Copilot/FloatingCopilotWidget';
 import { GeoJsonUploadModal } from './components/Modals/GeoJsonUploadModal';
 import { PrintReportModal } from './components/Modals/PrintReportModal';
 
 import { PRESET_FARMS } from './data/presetRegions';
 import { INITIAL_MICROSERVICES } from './data/microservicesData';
-import { FarmRegion, Language, CalibratedPixel, MicroserviceStatus } from './types';
+import { FarmRegion, Language, CalibratedPixel, MicroserviceStatus, CopilotMapFocus } from './types';
 import { generateCalibratedGrid } from './utils/geoCalculations';
 
 export default function App() {
@@ -29,10 +32,16 @@ export default function App() {
   const [alpha, setAlpha] = useState<number>(0.65);
   const [services, setServices] = useState<MicroserviceStatus[]>(INITIAL_MICROSERVICES);
   const [selectedPixel, setSelectedPixel] = useState<CalibratedPixel | null>(null);
+  const [copilotMapFocus, setCopilotMapFocus] = useState<CopilotMapFocus | null>(null);
 
   // Modals state
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [isPrintModalOpen, setIsPrintModalOpen] = useState(false);
+
+  const handleFocusMapLocation = (focus: CopilotMapFocus) => {
+    setCopilotMapFocus(focus);
+    setActiveTab('gis-map');
+  };
 
   // Set document title and direction
   useEffect(() => {
@@ -143,7 +152,7 @@ export default function App() {
   };
 
   return (
-    <div className={`min-h-screen bg-[#0B0F19] text-slate-100 flex flex-col font-sans ${lang === 'ar' ? 'font-tajawal' : ''}`}>
+    <div className={`min-h-screen w-full max-w-full overflow-x-hidden bg-[#0B0F19] text-slate-100 flex flex-col font-sans ${lang === 'ar' ? 'font-tajawal' : ''}`}>
       {/* Top Header */}
       <Header
         currentFarm={currentFarm}
@@ -166,7 +175,7 @@ export default function App() {
       />
 
       {/* Main Content View */}
-      <main className="flex-1 max-w-7xl w-full mx-auto p-4 lg:p-6">
+      <main className="flex-1 w-full max-w-7xl mx-auto p-3 sm:p-4 lg:p-6 overflow-x-hidden">
         {activeTab === 'pipeline' && (
           <PipelineController
             farm={currentFarm}
@@ -202,14 +211,59 @@ export default function App() {
               </div>
             </div>
 
+            {/* Copilot Map Focus Alert Banner */}
+            {copilotMapFocus && (
+              <div className="p-3 bg-cyan-950/60 border border-cyan-500/50 rounded-xl flex items-center justify-between gap-3 text-xs text-cyan-200">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping shrink-0" />
+                  <span>
+                    {lang === 'ar'
+                      ? `تم تركيز الخريطة بواسطة SolAI Copilot: ${copilotMapFocus.titleAr} (${copilotMapFocus.lat.toFixed(4)}°N, ${copilotMapFocus.lng.toFixed(4)}°E)`
+                      : `Map Viewport focused by SolAI Copilot: ${copilotMapFocus.titleEn} (${copilotMapFocus.lat.toFixed(4)}°N, ${copilotMapFocus.lng.toFixed(4)}°E)`}
+                  </span>
+                </div>
+                <button
+                  onClick={() => setCopilotMapFocus(null)}
+                  className="px-2 py-0.5 bg-cyan-900/60 hover:bg-cyan-800 text-cyan-200 rounded text-[11px] font-mono transition"
+                >
+                  {lang === 'ar' ? 'إلغاء التحديد' : 'Clear Focus'}
+                </button>
+              </div>
+            )}
+
             <GisMap
               farm={currentFarm}
               lang={lang}
               calibratedGrid={calibratedGrid}
               selectedPixel={selectedPixel}
               onSelectPixel={setSelectedPixel}
+              focusLocation={copilotMapFocus}
             />
           </div>
+        )}
+
+        {activeTab === 'copilot' && (
+          <SolAiCopilot
+            lang={lang}
+            onFocusMapLocation={handleFocusMapLocation}
+            onSwitchTab={(tabId) => setActiveTab(tabId as TabId)}
+          />
+        )}
+
+        {activeTab === 'flood-forecast' && (
+          <DeepLearningFloodForecasting
+            lang={lang}
+            onFocusMapLocation={(c) => {
+              handleFocusMapLocation({
+                lat: c.lat,
+                lng: c.lng,
+                zoom: 15,
+                titleEn: c.titleEn,
+                titleAr: c.titleAr
+              });
+            }}
+            onOpenCopilot={() => setActiveTab('copilot')}
+          />
         )}
 
         {activeTab === 'post-fire' && (
@@ -319,6 +373,13 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* Global Floating AI Copilot Widget */}
+      <FloatingCopilotWidget
+        lang={lang}
+        onFocusMapLocation={handleFocusMapLocation}
+        onSwitchTab={(tabId) => setActiveTab(tabId as TabId)}
+      />
     </div>
   );
 }

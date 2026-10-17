@@ -11,11 +11,13 @@ import {
   Satellite,
   FlaskConical,
   SunMedium,
-  Flame
+  Flame,
+  Bot,
+  BrainCircuit
 } from 'lucide-react';
 import { Language } from '../types';
 
-export type TabId = 'pipeline' | 'gis-map' | 'post-fire' | 'climate' | 'carbon' | 'ndvi' | 'fertilizer' | 'testing' | 'architecture' | 'postgis' | 'queue' | 'geo-engine';
+export type TabId = 'pipeline' | 'gis-map' | 'copilot' | 'flood-forecast' | 'post-fire' | 'climate' | 'carbon' | 'ndvi' | 'fertilizer' | 'testing' | 'architecture' | 'postgis' | 'queue' | 'geo-engine';
 
 interface NavigationTabsProps {
   activeTab: TabId;
@@ -45,6 +47,20 @@ export const NavigationTabs: React.FC<NavigationTabsProps> = ({
       labelEn: 'Map & Drawing',
       labelAr: 'الخريطة والرسم',
       icon: <MapIcon className="w-4 h-4" />,
+    },
+    {
+      id: 'copilot',
+      labelEn: 'SolAI Copilot (GIS AI)',
+      labelAr: 'مساعد الذكاء الاصطناعي (SolAI)',
+      icon: <Bot className="w-4 h-4 text-emerald-400" />,
+      badge: isAr ? 'RAG ومحادثة' : 'RAG + Voice',
+    },
+    {
+      id: 'flood-forecast',
+      labelEn: 'Deep Learning Flood Forecast',
+      labelAr: 'التنبؤ بالسيول (تعلم عميق)',
+      icon: <BrainCircuit className="w-4 h-4 text-cyan-400" />,
+      badge: isAr ? 'LSTM ورادار' : 'LSTM + Radar',
     },
     {
       id: 'post-fire',
@@ -115,9 +131,9 @@ export const NavigationTabs: React.FC<NavigationTabsProps> = ({
   ];
 
   return (
-    <div className="border-b border-[#1E293B] bg-[#0B0F19]/90 backdrop-blur-md sticky top-[65px] z-40">
-      <div className="max-w-7xl mx-auto px-4 lg:px-6">
-        <nav className="flex space-x-1 sm:space-x-2 overflow-x-auto py-2 no-scrollbar" aria-label="Tabs">
+    <div className="border-b border-[#1E293B] bg-[#0B0F19]/95 backdrop-blur-md sticky top-[57px] sm:top-[65px] z-40 w-full overflow-hidden">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
+        <nav className="flex space-x-1 sm:space-x-2 overflow-x-auto py-2 no-scrollbar px-1" aria-label="Tabs">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
             return (

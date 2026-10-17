@@ -321,3 +321,83 @@ export interface PostFireWatershedProfile {
   zones: BurnSeverityZone[];
   hotspots: PostFireHotspot[];
 }
+
+// -------------------------------------------------------------
+// SolAI Copilot Interfaces
+// -------------------------------------------------------------
+export type CopilotRole = 'user' | 'assistant' | 'system';
+
+export interface CopilotMapFocus {
+  lat: number;
+  lng: number;
+  zoom: number;
+  titleEn: string;
+  titleAr: string;
+  descriptionEn?: string;
+  descriptionAr?: string;
+  badge?: string;
+}
+
+export interface CopilotGeoJsonPayload {
+  type: string;
+  name: string;
+  data: Record<string, unknown>;
+}
+
+export interface CopilotMessage {
+  id: string;
+  role: CopilotRole;
+  text: string;
+  timestamp: string;
+  intent?: string;
+  mapFocus?: CopilotMapFocus;
+  geoJsonPayload?: CopilotGeoJsonPayload;
+  suggestedActions?: {
+    id: string;
+    labelEn: string;
+    labelAr: string;
+    actionType: 'focus_map' | 'view_report' | 'open_tab' | 'run_simulation';
+    payload?: any;
+  }[];
+  metricsSummary?: {
+    labelEn: string;
+    labelAr: string;
+    value: string;
+    color?: string;
+  }[];
+}
+
+// -------------------------------------------------------------
+// Deep Learning Flood & Runoff Forecasting Interfaces
+// -------------------------------------------------------------
+export type FloodAlertLevel = 'NORMAL' | 'ADVISORY' | 'WATCH' | 'WARNING' | 'EMERGENCY_FLASH_FLOOD';
+
+export interface HydrographPoint {
+  timeStepMinutes: number; // e.g. 0, 15, 30, 45, 60, 90, 120, 180, 240, 300, 360
+  timeLabel: string;
+  timeLabelAr: string;
+  radarRainfallMmH: number;
+  baseFlowM3s: number;
+  lstmForecastM3s: number;
+  prophetForecastM3s: number;
+  criticalThresholdM3s: number;
+  sedimentConcentrationPct: number;
+}
+
+export interface CatchmentHydroProfile {
+  id: string;
+  nameEn: string;
+  nameAr: string;
+  damNameEn: string;
+  damNameAr: string;
+  coordinates: { lat: number; lng: number };
+  catchmentAreaKm2: number;
+  meanSlopePct: number;
+  timeOfConcentrationHours: number;
+  criticalDischargeThresholdM3s: number;
+  baseSoilMoisturePct: number;
+  currentRadarRainfallMmH: number;
+  targetKeyVulnerabilitiesAr: string[];
+  targetKeyVulnerabilitiesEn: string[];
+}
+

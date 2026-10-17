@@ -22,6 +22,7 @@ interface GisMapProps {
   calibratedGrid: CalibratedPixel[];
   selectedPixel: CalibratedPixel | null;
   onSelectPixel: (pixel: CalibratedPixel | null) => void;
+  focusLocation?: { lat: number; lng: number; zoom?: number; title?: string } | null;
 }
 
 export const GisMap: React.FC<GisMapProps> = ({
@@ -30,6 +31,7 @@ export const GisMap: React.FC<GisMapProps> = ({
   calibratedGrid,
   selectedPixel,
   onSelectPixel,
+  focusLocation,
 }) => {
   const isAr = lang === 'ar';
   const mapContainerRef = useRef<HTMLDivElement>(null);
@@ -80,6 +82,33 @@ export const GisMap: React.FC<GisMapProps> = ({
       mapInstanceRef.current.setView([farm.center.lat, farm.center.lng], farm.zoom);
     }
   }, [farm.id]);
+
+  // Animate and fly to focusLocation if requested by Copilot
+  useEffect(() => {
+    if (mapInstanceRef.current && focusLocation) {
+      mapInstanceRef.current.flyTo(
+        [focusLocation.lat, focusLocation.lng], 
+        focusLocation.zoom || 15, 
+        { duration: 1.5 }
+      );
+
+      const focusMarker = L.circleMarker([focusLocation.lat, focusLocation.lng], {
+        radius: 12,
+        color: '#22d3ee',
+        weight: 3,
+        fillColor: '#06b6d4',
+        fillOpacity: 0.6,
+      }).addTo(mapInstanceRef.current);
+
+      if (focusLocation.title) {
+        focusMarker.bindPopup(`
+          <div style="font-family: inherit; font-size: 11px; color: #0f172a; font-weight: bold;">
+            📍 ${focusLocation.title}
+          </div>
+        `).openPopup();
+      }
+    }
+  }, [focusLocation]);
 
   // Update tile layer & GIS overlays
   useEffect(() => {

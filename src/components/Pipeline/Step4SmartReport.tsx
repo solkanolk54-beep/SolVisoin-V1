@@ -142,17 +142,17 @@ Soil Health Score: ${healthScore}/100`;
             </div>
           </div>
 
-          <div className="flex items-center gap-2 self-start md:self-auto flex-wrap">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full md:w-auto flex-wrap mt-3 md:mt-0">
             <button
               onClick={onPrev}
-              className="flex items-center gap-1.5 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-medium transition"
+              className="flex items-center justify-center gap-1.5 px-3.5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-medium transition w-full sm:w-auto active:scale-95 cursor-pointer"
             >
               <ArrowLeft className="w-3.5 h-3.5 rtl:rotate-180" />
               <span>{isAr ? 'نموذج RUSLE' : 'Back to RUSLE'}</span>
             </button>
             <button
               onClick={() => window.print()}
-              className="flex items-center gap-1.5 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg text-xs font-medium transition active:scale-95"
+              className="flex items-center justify-center gap-1.5 px-3.5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-xl text-xs font-medium transition active:scale-95 cursor-pointer w-full sm:w-auto"
               title={isAr ? 'طباعة التقرير الفني' : 'Print Field Report'}
             >
               <Printer className="w-3.5 h-3.5 text-emerald-400" />
@@ -160,14 +160,14 @@ Soil Health Score: ${healthScore}/100`;
             </button>
             <button
               onClick={handleCopyReportSummary}
-              className="flex items-center gap-1.5 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg text-xs font-medium transition active:scale-95"
+              className="flex items-center justify-center gap-1.5 px-3.5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-xl text-xs font-medium transition active:scale-95 cursor-pointer w-full sm:w-auto"
             >
               <Share2 className="w-3.5 h-3.5 text-cyan-400" />
               <span>{isCopied ? (isAr ? 'تم النسخ!' : 'Copied!') : (isAr ? 'نسخ الملخص' : 'Copy Summary')}</span>
             </button>
             <button
               onClick={onExportGeoJson}
-              className="flex items-center gap-2 px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 rounded-lg text-xs font-bold transition shadow-lg shadow-emerald-500/20 active:scale-95"
+              className="flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 rounded-xl text-xs font-bold transition shadow-lg shadow-emerald-500/20 active:scale-95 cursor-pointer w-full sm:w-auto"
             >
               <Download className="w-3.5 h-3.5" />
               <span>{isAr ? 'تصدير GeoJSON' : 'Export GeoJSON'}</span>

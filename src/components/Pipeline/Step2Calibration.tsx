@@ -88,17 +88,17 @@ export const Step2Calibration: React.FC<Step2CalibrationProps> = ({
             </div>
           </div>
 
-          <div className="flex items-center gap-2 self-start md:self-auto">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full md:w-auto mt-3 md:mt-0">
             <button
               onClick={onPrev}
-              className="flex items-center gap-1.5 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-medium transition"
+              className="flex items-center justify-center gap-1.5 px-3.5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-medium transition w-full sm:w-auto active:scale-95 cursor-pointer"
             >
               <ArrowLeft className="w-3.5 h-3.5 rtl:rotate-180" />
               <span>{isAr ? 'القص والتحويل' : 'Back to Clip'}</span>
             </button>
             <button
               onClick={onNext}
-              className="flex items-center gap-2 px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 rounded-lg text-xs font-bold transition shadow-lg shadow-emerald-500/20 active:scale-95"
+              className="flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 rounded-xl text-xs font-bold transition shadow-lg shadow-emerald-500/20 active:scale-95 cursor-pointer w-full sm:w-auto"
             >
               <span>{isAr ? 'الانتقال لنموذج RUSLE K' : 'Next: RUSLE K-Factor'}</span>
               <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
