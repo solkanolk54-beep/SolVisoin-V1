@@ -34,15 +34,15 @@ export const NavigationTabs: React.FC<NavigationTabsProps> = ({
   const tabs: { id: TabId; labelEn: string; labelAr: string; icon: React.ReactNode; badge?: string }[] = [
     {
       id: 'pipeline',
-      labelEn: 'Geo-Processing Flow',
-      labelAr: 'المسار المكاني (٤ خطوات)',
+      labelEn: 'Spatial Workflow (4 Steps)',
+      labelAr: 'المسار المكاني (4 خطوات)',
       icon: <GitBranch className="w-4 h-4" />,
       badge: isAr ? 'الأساس' : 'Core',
     },
     {
       id: 'gis-map',
-      labelEn: 'Interactive GIS Map & Raster',
-      labelAr: 'الخريطة والرستر المكاني',
+      labelEn: 'Map & Drawing',
+      labelAr: 'الخريطة والرسم',
       icon: <MapIcon className="w-4 h-4" />,
     },
     {
@@ -107,7 +107,7 @@ export const NavigationTabs: React.FC<NavigationTabsProps> = ({
   ];
 
   return (
-    <div className="border-b border-slate-800 bg-slate-900/40">
+    <div className="border-b border-[#1E293B] bg-[#0B0F19]/90 backdrop-blur-md sticky top-[65px] z-40">
       <div className="max-w-7xl mx-auto px-4 lg:px-6">
         <nav className="flex space-x-1 sm:space-x-2 overflow-x-auto py-2 no-scrollbar" aria-label="Tabs">
           {tabs.map((tab) => {
@@ -118,8 +118,8 @@ export const NavigationTabs: React.FC<NavigationTabsProps> = ({
                 onClick={() => onChangeTab(tab.id)}
                 className={`flex items-center gap-2 px-3.5 py-2 text-xs sm:text-sm font-medium rounded-lg whitespace-nowrap transition-all ${
                   isActive
-                    ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/40 shadow-sm shadow-emerald-950'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 border border-transparent'
+                    ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/50 shadow-sm shadow-emerald-950 font-bold'
+                    : 'text-slate-400 hover:text-slate-200 hover:bg-[#0F172A] border border-transparent'
                 }`}
               >
                 <span className={isActive ? 'text-emerald-400' : 'text-slate-500'}>
@@ -130,8 +130,8 @@ export const NavigationTabs: React.FC<NavigationTabsProps> = ({
                   <span
                     className={`ml-1 px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
                       isActive
-                        ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
-                        : 'bg-slate-800 text-slate-400 border border-slate-700'
+                        ? 'bg-emerald-500/25 text-emerald-300 border border-emerald-500/40 font-bold'
+                        : 'bg-[#0F172A] text-slate-400 border border-[#1E293B]'
                     }`}
                   >
                     {tab.badge}

@@ -142,7 +142,7 @@ export default function App() {
   };
 
   return (
-    <div className={`min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans ${lang === 'ar' ? 'font-tajawal' : ''}`}>
+    <div className={`min-h-screen bg-[#0B0F19] text-slate-100 flex flex-col font-sans ${lang === 'ar' ? 'font-tajawal' : ''}`}>
       {/* Top Header */}
       <Header
         currentFarm={currentFarm}
@@ -295,7 +295,7 @@ export default function App() {
       />
 
       {/* Footer */}
-      <footer className="border-t border-slate-800/80 bg-slate-950/80 py-4 px-6 text-xs text-slate-500 font-mono">
+      <footer className="border-t border-[#1E293B] bg-[#0B0F19] py-4 px-6 text-xs text-slate-500 font-mono">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
           <div>
             SolVision Platform © 2026 • Core Spatial & Agricultural Intelligence Stack

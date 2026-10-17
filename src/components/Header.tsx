@@ -41,7 +41,7 @@ export const Header: React.FC<HeaderProps> = ({
   const isAr = lang === 'ar';
 
   return (
-    <header className="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-md border-b border-slate-800/80 px-4 lg:px-6 py-3">
+    <header className="sticky top-0 z-50 bg-[#0B0F19]/95 backdrop-blur-md border-b border-[#1E293B] px-4 lg:px-6 py-3 transition-colors">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-3">
         {/* Brand & System Status */}
         <div className="flex items-center gap-3">
@@ -57,20 +57,20 @@ export const Header: React.FC<HeaderProps> = ({
               <h1 className="text-xl font-bold tracking-tight bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
                 SolVision
               </h1>
-              <span className="text-xs px-2 py-0.5 rounded-full font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+              <span className="text-xs px-2.5 py-0.5 rounded-full font-mono bg-emerald-500/15 text-emerald-400 border border-emerald-500/40 font-medium">
                 v1.3.0 • Geo-Engine
               </span>
             </div>
             <p className="text-xs text-slate-400">
               {isAr
                 ? 'النواة الهندسية للتحليل المكاني والزراعي الذكي • بنية خدمات مصغرة'
-                : 'Spatial Intelligence Architecture & Core Geo-Processing Engine'}
+                : 'Spatial Intelligence Architecture & Core Geo-Processing Engine • Microservices Mesh'}
             </p>
           </div>
         </div>
 
         {/* Live Microservices telemetry pill */}
-        <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-800 font-mono text-xs">
+        <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#0F172A]/90 border border-[#1E293B] font-mono text-xs">
           <div className="flex items-center gap-1.5 text-slate-300">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             <span>Stack:</span>
@@ -92,7 +92,7 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center gap-2 self-end md:self-auto flex-wrap">
           {/* Farm Region Select */}
           <div className="relative group">
-            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 border border-slate-700/80 rounded-lg text-xs hover:border-emerald-500/50 transition cursor-pointer">
+            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[#0F172A] border border-[#1E293B] rounded-lg text-xs hover:border-emerald-500/60 transition cursor-pointer">
               <MapPin className="w-3.5 h-3.5 text-emerald-400" />
               <select
                 aria-label="Select Farm Region"
@@ -103,12 +103,18 @@ export const Header: React.FC<HeaderProps> = ({
                 }}
                 className="bg-transparent text-slate-200 text-xs focus:outline-none cursor-pointer pr-4 font-medium"
               >
-                {allFarms.map((farm) => (
-                  <option key={farm.id} value={farm.id} className="bg-slate-900 text-slate-200">
-                    {farm.isMultiPolygon ? '⚡ [MultiPolygon] ' : ''}
-                    {isAr ? farm.nameAr : farm.nameEn} ({farm.areaHectares} ha)
-                  </option>
-                ))}
+                {allFarms.map((farm) => {
+                  // Format requested: e.g. "قطاع الحمضيات (ha 142.5)"
+                  const zoneLabel = isAr
+                    ? (farm.id === 'mitidja-citrus-pilot' ? 'قطاع الحمضيات' : farm.nameAr)
+                    : (farm.id === 'mitidja-citrus-pilot' ? 'Citrus Sector' : farm.nameEn);
+                  return (
+                    <option key={farm.id} value={farm.id} className="bg-[#0B0F19] text-slate-200">
+                      {farm.isMultiPolygon ? '⚡ [Multi] ' : ''}
+                      {zoneLabel} ({farm.areaHectares} ha)
+                    </option>
+                  );
+                })}
               </select>
             </div>
           </div>
@@ -116,17 +122,17 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Upload GeoJSON button */}
           <button
             onClick={onOpenUpload}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700/80 rounded-lg text-xs font-medium transition active:scale-95"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-[#0F172A] hover:bg-slate-800 text-slate-200 border border-[#1E293B] rounded-lg text-xs font-medium transition active:scale-95"
             title={isAr ? 'رفع مضلع مزرعة (GeoJSON)' : 'Upload GeoJSON Boundary'}
           >
-            <span className="text-emerald-400">＋</span>
+            <span className="text-emerald-400 font-bold">＋</span>
             <span>{isAr ? 'رفع مضلع' : 'Upload'}</span>
           </button>
 
           {/* Print Report button */}
           <button
             onClick={onOpenPrint}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700/80 rounded-lg text-xs font-medium transition active:scale-95"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-[#0F172A] hover:bg-slate-800 text-slate-200 border border-[#1E293B] rounded-lg text-xs font-medium transition active:scale-95"
             title={isAr ? 'طباعة تقرير الحقل (PDF)' : 'Print Field Report (PDF)'}
           >
             <span className="text-cyan-400">🖨</span>
@@ -136,21 +142,21 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Export GeoJSON button */}
           <button
             onClick={onExportGeoJson}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700/80 rounded-lg text-xs font-medium transition active:scale-95"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-[#0F172A] hover:bg-slate-800 text-slate-200 border border-[#1E293B] rounded-lg text-xs font-medium transition active:scale-95"
             title={isAr ? 'تصدير مضلع الحقل والطبقات (GeoJSON)' : 'Export Farm & Layers (GeoJSON)'}
           >
             <Download className="w-3.5 h-3.5 text-cyan-400" />
             <span className="hidden sm:inline">GeoJSON</span>
           </button>
 
-          {/* Language Toggle */}
+          {/* Language Toggle (EN / AR) */}
           <button
             onClick={onToggleLang}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700/80 rounded-lg text-xs font-medium transition active:scale-95"
-            title={isAr ? 'تبديل إلى الإنجليزية' : 'Switch to Arabic'}
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-[#0F172A] hover:bg-slate-800 text-slate-200 border border-[#1E293B] hover:border-amber-500/50 rounded-lg text-xs font-medium transition active:scale-95"
+            title={isAr ? 'Switch to English' : 'تبديل إلى العربية'}
           >
             <Languages className="w-3.5 h-3.5 text-amber-400" />
-            <span>{isAr ? 'EN' : 'العربية'}</span>
+            <span className="font-mono font-bold">{isAr ? 'EN' : 'العربية'}</span>
           </button>
         </div>
       </div>

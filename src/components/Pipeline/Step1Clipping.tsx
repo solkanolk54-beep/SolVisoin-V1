@@ -58,48 +58,50 @@ export const Step1Clipping: React.FC<Step1ClippingProps> = ({ farm, lang, onNext
   return (
     <div className="space-y-6">
       {/* Step Header & Briefing Requirement */}
-      <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-5">
+      <div className="bg-[#0F172A]/80 border border-[#1E293B] rounded-2xl p-5 shadow-xl">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-start gap-3">
-            <div className="p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 mt-1">
+            <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 mt-1 shadow-sm">
               <Scissors className="w-5 h-5" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold">
                   {isAr ? 'المرحلة الأولى' : 'Stage 01'}
                 </span>
                 <span className="text-slate-600">•</span>
-                <span className="text-xs text-slate-400">Rasterio + GDAL + VRT</span>
+                <span className="px-2 py-0.5 rounded font-mono text-[11px] bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-semibold">
+                  Rasterio + GDAL + VRT
+                </span>
               </div>
-              <h2 className="text-lg font-bold text-slate-100 mt-0.5">
+              <h2 className="text-lg font-bold text-slate-100 mt-1">
                 {isAr
-                  ? '١. القص والتحويل الجغرافي (Clipping & Reprojection)'
-                  : '1. Spatial Clipping & Coordinate Reprojection'}
+                  ? 'المرحلة الأولى - ١. القص والتحويل الجغرافي (Clipping & Reprojection)'
+                  : 'Stage 01 - 1. Spatial Clipping & Coordinate Reprojection'}
               </h2>
-              <p className="text-xs text-slate-400 mt-1 max-w-2xl">
+              <p className="text-xs text-slate-300 mt-1.5 max-w-3xl leading-relaxed">
                 {isAr
-                  ? 'استخدام مكتبة Rasterio لقص نافذة الحقل فقط من ملفات VRT العالمية (SoilGrids) دون تحميل ملف الرستر كاملاً لتوفير الذاكرة، مع إعادة الإسقاط إلى UTM Zone 31N (EPSG:32631) المخصصة للجزائر وشمال أفريقيا.'
+                  ? 'استخدام مكتبة Rasterio لقص نافذة الحقل فقط من ملفات VRT العالمية (SoilGrids) دون تحميل ملف الراستر كاملاً لتوفير الذاكرة، مع إعادة الإسقاط إلى نظام UTM Zone 31N (EPSG:32631) المخصصة للجزائر وشمال أفريقيا.'
                   : 'Windowed bounding-box clipping from global SoilGrids Virtual Raster (.vrt) datasets using Rasterio, reducing RAM footprint from gigabytes to megabytes, reprojecting directly into UTM Zone 31N (EPSG:32631).'}
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 self-start md:self-auto">
+          <div className="flex items-center gap-2 self-start md:self-auto shrink-0">
             <button
               onClick={handleSimulateClipping}
               disabled={isProcessing}
-              className="flex items-center gap-2 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg text-xs font-medium transition"
+              className="flex items-center gap-2 px-3 py-2 bg-[#0B0F19] hover:bg-slate-800 text-slate-200 border border-[#1E293B] rounded-xl text-xs font-medium transition cursor-pointer"
             >
               <RefreshCw className={`w-3.5 h-3.5 ${isProcessing ? 'animate-spin text-emerald-400' : ''}`} />
               <span>{isAr ? 'إعادة تشغيل القص' : 'Re-run Clip'}</span>
             </button>
             <button
               onClick={onNext}
-              className="flex items-center gap-2 px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 rounded-lg text-xs font-bold transition shadow-lg shadow-emerald-500/20 active:scale-95"
+              className="flex items-center gap-2 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 rounded-xl text-xs font-bold transition shadow-lg shadow-emerald-500/25 active:scale-95 cursor-pointer"
             >
               <span>{isAr ? 'الانتقال للمعايرة الحقلية' : 'Next: Field Calibration'}</span>
-              <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
+              <ArrowRight className="w-4 h-4 rtl:rotate-180" />
             </button>
           </div>
         </div>
