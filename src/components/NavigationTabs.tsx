@@ -13,11 +13,33 @@ import {
   SunMedium,
   Flame,
   Bot,
-  BrainCircuit
+  BrainCircuit,
+  Mountain,
+  Cpu,
+  Rocket,
+  Binary
 } from 'lucide-react';
 import { Language } from '../types';
 
-export type TabId = 'pipeline' | 'gis-map' | 'copilot' | 'flood-forecast' | 'post-fire' | 'climate' | 'carbon' | 'ndvi' | 'fertilizer' | 'testing' | 'architecture' | 'postgis' | 'queue' | 'geo-engine';
+export type TabId = 
+  | 'roadmap'
+  | 'terrain-3d'
+  | 'cpp-hpc'
+  | 'hybrid-dnn'
+  | 'pipeline' 
+  | 'gis-map' 
+  | 'copilot' 
+  | 'flood-forecast' 
+  | 'post-fire' 
+  | 'climate' 
+  | 'carbon' 
+  | 'ndvi' 
+  | 'fertilizer' 
+  | 'testing' 
+  | 'architecture' 
+  | 'postgis' 
+  | 'queue' 
+  | 'geo-engine';
 
 interface NavigationTabsProps {
   activeTab: TabId;
@@ -35,6 +57,34 @@ export const NavigationTabs: React.FC<NavigationTabsProps> = ({
   const isAr = lang === 'ar';
 
   const tabs: { id: TabId; labelEn: string; labelAr: string; icon: React.ReactNode; badge?: string }[] = [
+    {
+      id: 'roadmap',
+      labelEn: 'Global Roadmap (C++/3D/DNN)',
+      labelAr: 'خارطة الطريق العالمية (C++/3D)',
+      icon: <Rocket className="w-4 h-4 text-emerald-400" />,
+      badge: isAr ? 'استراتيجي' : 'Strategic',
+    },
+    {
+      id: 'terrain-3d',
+      labelEn: '3D GPU Terrain & Debris Flow',
+      labelAr: 'محاكاة 3D للسيول والتضاريس',
+      icon: <Mountain className="w-4 h-4 text-cyan-400" />,
+      badge: isAr ? 'WebGL 2.0' : '3D Sim',
+    },
+    {
+      id: 'cpp-hpc',
+      labelEn: 'C++20 HPC Core & Benchmarks',
+      labelAr: 'نواة C++ والحوسبة الفائقة',
+      icon: <Cpu className="w-4 h-4 text-emerald-400" />,
+      badge: isAr ? 'AVX-512' : 'OpenMP',
+    },
+    {
+      id: 'hybrid-dnn',
+      labelEn: 'Hybrid Neural Net (MLP+GRU)',
+      labelAr: 'الشبكة العصبية الهجينة (MLP+GRU)',
+      icon: <BrainCircuit className="w-4 h-4 text-purple-400" />,
+      badge: isAr ? 'تعلم عميق' : 'PyTorch',
+    },
     {
       id: 'pipeline',
       labelEn: 'Spatial Workflow (4 Steps)',

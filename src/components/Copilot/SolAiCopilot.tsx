@@ -338,6 +338,24 @@ export const SolAiCopilot: React.FC<SolAiCopilotProps> = ({
         >
           {isAr ? '⛰️ توحل سد بوسيابة' : '⛰️ Boussiaba Siltation'}
         </button>
+        <button
+          onClick={() => handleSendQuery(isAr ? 'كيف تسرع نواة C++20 مع تعليمات AVX-512 معالجة خرائط الرستر؟' : 'How does the C++20 core with AVX-512 accelerate raster computation?')}
+          className="px-2.5 py-1 bg-emerald-950/60 hover:bg-emerald-900/80 text-emerald-300 border border-emerald-800/60 rounded-full whitespace-nowrap transition cursor-pointer"
+        >
+          {isAr ? '⚡ نواة C++ و AVX-512' : '⚡ C++20 & AVX-512'}
+        </button>
+        <button
+          onClick={() => handleSendQuery(isAr ? 'اشرح لي محاكاة التضاريس ثلاثية الأبعاد 3D وحركة جزيئات السيول SPH' : 'Explain the 3D terrain simulation and SPH fluid particle dynamics')}
+          className="px-2.5 py-1 bg-cyan-950/60 hover:bg-cyan-900/80 text-cyan-300 border border-cyan-800/60 rounded-full whitespace-nowrap transition cursor-pointer"
+        >
+          {isAr ? '🎮 محاكاة التضاريس 3D' : '🎮 3D Terrain & SPH'}
+        </button>
+        <button
+          onClick={() => handleSendQuery(isAr ? 'كيف تدمج الشبكة العصبية الهجينة بين MLP المكاني و GRU الزمني للتنبؤ بالسيول؟' : 'How does the Hybrid MLP+GRU neural network predict flood runoff and siltation?')}
+          className="px-2.5 py-1 bg-purple-950/60 hover:bg-purple-900/80 text-purple-300 border border-purple-800/60 rounded-full whitespace-nowrap transition cursor-pointer"
+        >
+          {isAr ? '🧠 الشبكة الهجينة MLP+GRU' : '🧠 Hybrid MLP+GRU'}
+        </button>
       </div>
 
       {/* Chat Messages Body */}

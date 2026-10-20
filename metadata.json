@@ -1,6 +1,6 @@
 {
   "name": "SolVision Spatial Intelligence Platform",
-  "description": "Next-generation modular geospatial & agricultural intelligence platform with SoilGrids VRT clipping, IDW field calibration, RUSLE K-factor erosion modeling, and PostGIS pipeline.",
+  "description": "Sovereign High-Performance Spatial Intelligence Platform powered by C++20 OpenMP/SIMD Core, OpenGL/WebGL 2.0 3D Topographic Simulation, and Hybrid Deep Neural Networks (MLP + GRU).",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

@@ -16,6 +16,10 @@ import { PostFireRiskPipeline } from './components/PostFire/PostFireRiskPipeline
 import { SolAiCopilot } from './components/Copilot/SolAiCopilot';
 import { DeepLearningFloodForecasting } from './components/Forecasting/DeepLearningFloodForecasting';
 import { FloatingCopilotWidget } from './components/Copilot/FloatingCopilotWidget';
+import { GlobalRoadmapCockpit } from './components/Roadmap/GlobalRoadmapCockpit';
+import { TerrainSimulation3D } from './components/Simulation3D/TerrainSimulation3D';
+import { CppCoreHpcEngine } from './components/HPC/CppCoreHpcEngine';
+import { HybridMlpGruVisualizer } from './components/NeuralNetwork/HybridMlpGruVisualizer';
 import { GeoJsonUploadModal } from './components/Modals/GeoJsonUploadModal';
 import { PrintReportModal } from './components/Modals/PrintReportModal';
 
@@ -240,6 +244,40 @@ export default function App() {
               focusLocation={copilotMapFocus}
             />
           </div>
+        )}
+
+        {activeTab === 'roadmap' && (
+          <GlobalRoadmapCockpit
+            lang={lang}
+            onNavigateTab={(tabId) => setActiveTab(tabId as TabId)}
+          />
+        )}
+
+        {activeTab === 'terrain-3d' && (
+          <TerrainSimulation3D
+            lang={lang}
+            onFocusCoordinates={(lat, lng, title) => {
+              handleFocusMapLocation({
+                lat,
+                lng,
+                zoom: 15,
+                titleEn: title,
+                titleAr: title
+              });
+            }}
+          />
+        )}
+
+        {activeTab === 'cpp-hpc' && (
+          <CppCoreHpcEngine
+            lang={lang}
+          />
+        )}
+
+        {activeTab === 'hybrid-dnn' && (
+          <HybridMlpGruVisualizer
+            lang={lang}
+          />
         )}
 
         {activeTab === 'copilot' && (

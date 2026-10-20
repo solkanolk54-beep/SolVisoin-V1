@@ -20,18 +20,19 @@ export const FloatingCopilotWidget: React.FC<FloatingCopilotWidgetProps> = ({
   return (
     <>
       {/* Floating Action Button */}
-      <div className="fixed bottom-6 right-6 rtl:right-auto rtl:left-6 z-50">
+      <div className="fixed bottom-4 right-4 rtl:right-auto rtl:left-4 sm:bottom-6 sm:right-6 sm:rtl:left-6 z-50">
         {!isOpen && (
           <button
             onClick={() => setIsOpen(true)}
-            className="flex items-center gap-2.5 px-4 py-3 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 font-bold rounded-2xl shadow-2xl shadow-emerald-500/30 border border-emerald-300/40 transition-all hover:scale-105 active:scale-95 cursor-pointer group"
+            className="flex items-center gap-2 sm:gap-2.5 px-3 py-2 sm:px-4 sm:py-3 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 font-bold rounded-2xl shadow-2xl shadow-emerald-500/30 border border-emerald-300/40 transition-all hover:scale-105 active:scale-95 cursor-pointer group"
           >
             <div className="relative">
-              <Bot className="w-5 h-5 text-slate-950" />
-              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-rose-500 rounded-full animate-ping" />
+              <Bot className="w-4 h-4 sm:w-5 sm:h-5 text-slate-950" />
+              <span className="absolute -top-1 -right-1 w-2 sm:w-2.5 h-2 sm:h-2.5 bg-rose-500 rounded-full animate-ping" />
             </div>
             <span className="text-xs font-mono font-bold">
-              {isAr ? 'SolAI Copilot (مساعد الذكاء الاصطناعي)' : 'SolAI Copilot'}
+              <span className="hidden sm:inline">{isAr ? 'SolAI Copilot (مساعد الذكاء الاصطناعي)' : 'SolAI Copilot'}</span>
+              <span className="sm:hidden">{isAr ? 'SolAI Copilot' : 'SolAI'}</span>
             </span>
             <span className="px-1.5 py-0.5 rounded text-[10px] bg-slate-950/20 font-mono">
               RAG
